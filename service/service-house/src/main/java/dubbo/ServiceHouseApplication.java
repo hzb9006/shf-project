@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 @EnableDubbo
 @MapperScan(basePackages = "dubbo.mapper")// 不要忘记！！
-public class ServiceAclApplication {
+public class ServiceHouseApplication {
 
     public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication(ServiceAclApplication.class);
+        SpringApplication springApplication = new SpringApplication(ServiceHouseApplication.class);
         springApplication.setAllowCircularReferences(Boolean.TRUE);
         springApplication.run(args);
 

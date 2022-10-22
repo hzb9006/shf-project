@@ -14,9 +14,28 @@
             <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
     </resultMap>
 
+    <!-- 用于select查询公用抽取的列 -->
     <sql id="Base_Column_List">
         id,parent_id,name,
         dict_code,create_time,update_time,
         is_deleted
     </sql>
+
+<!--        List<HseDict> findListByParentId(Long parentId);-->
+    <!--根据父节点的id查询它所有的子节点-->
+    <select id="findListByParentId" resultMap="BaseResultMap">
+        select id,parent_id,name,
+               dict_code,create_time,update_time,
+               is_deleted
+        from hse_dict
+        where parent_id=#{parentId}
+    </select>
+
+    <!--判断查询到的子节点是否是父节点-->
+<!--     Integer countIsParent(Long id);-->
+<!--    注意，我们要获取的结果是记录的数量，所以返回的是一个数值，所以使用resultType="Integer"，否则返回数据会导致空指针异常-->
+    <select id="countIsParent" resultType="Integer">
+        select count(*) from hse_dict
+        where parent_id=#{id}
+    </select>
 </mapper>
