@@ -1,4 +1,0 @@
-# 第一版本
-原始版本使用的是SSM+pagehelper插件开发的，此版本使用的是Springboot，mybatisplus，pagehelper插件进行开发。
-已经完成了角色管理的增删改查和分页查询，用户管理的增删改查后续有时间在写。下一步进行中间件的学习
-后续可以考虑学习一下SQL语句和练习Mybatis，不能太依赖Mybatisplus!!
