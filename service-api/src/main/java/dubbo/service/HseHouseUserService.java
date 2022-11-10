@@ -1,7 +1,11 @@
 package dubbo.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import model.HseHouseBroker;
+import model.HseHouseImage;
 import model.HseHouseUser;
+
+import java.util.List;
 
 /**
 * @author 大饼干
@@ -10,4 +14,7 @@ import model.HseHouseUser;
 */
 public interface HseHouseUserService extends IService<HseHouseUser> {
 
+    List<HseHouseUser> getHouseUsersByHouseId(Long houseId);
+
+    void delete(Long houseUserId);
 }

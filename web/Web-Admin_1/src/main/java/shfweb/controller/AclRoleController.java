@@ -1,18 +1,16 @@
 package shfweb.controller;
 
-
 import com.github.pagehelper.PageInfo;
 import dubbo.service.AclRoleService;
 import model.AclRole;
 import org.apache.dubbo.config.annotation.DubboReference;
-
-import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 import java.util.Map;
@@ -20,7 +18,6 @@ import java.util.TreeMap;
 
 @Controller
 @RequestMapping("/role")
-@EnableDubbo
 public class AclRoleController {
     // 这是一个常量
     public static final String SUCCESS_PAGE="/common/successPage";

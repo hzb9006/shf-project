@@ -1,11 +1,15 @@
 package dubbo.impl;
 
 
+
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import dubbo.mapper.AclAdminMapper;
 import dubbo.service.AclAdminService;
 import model.AclAdmin;
 import org.apache.dubbo.config.annotation.DubboService;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * @author 大饼干
@@ -16,7 +20,12 @@ import org.apache.dubbo.config.annotation.DubboService;
 public class AclAdminServiceImpl extends ServiceImpl<AclAdminMapper, AclAdmin>
         implements AclAdminService {
 
-}
+    @Autowired
+    AclAdminMapper aclAdminMapper;
+    @Override
+    public List<AclAdmin> findAll() {
+        return aclAdminMapper.findAll();
+}}
 
 
 

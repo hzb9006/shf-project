@@ -1,14 +1,12 @@
 package dubbo.impl;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import dubbo.mapper.HseDictMapper;
 import dubbo.service.HseDictService;
 import lombok.extern.slf4j.Slf4j;
 import model.HseDict;
 import org.apache.dubbo.config.annotation.DubboService;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -80,6 +78,27 @@ public class HseDictServiceImpl extends ServiceImpl<HseDictMapper, HseDict>
 
 
 
+    }
+
+    @Override
+    public List<HseDict> findDictByid(Long id) {
+        return (List<HseDict>) dictMapper.selectById(id);
+    }
+
+
+    @Override
+    public List<HseDict> findDictByDictCode(String dictCode) {
+        // 1. 根据dict_code查询对应的数据
+        HseDict dictByDictCode = dictMapper.getDictByDictCode(dictCode);
+        // 2.查询对应数据的id，并且根据该id，查出parent_id为该id的子节点
+        Long id = dictByDictCode.getId();
+        List<HseDict> listByParentId = dictMapper.findListByParentId(id);
+        return listByParentId;
+    }
+
+    @Override
+    public List<HseDict> findListByParentIds(Long areaId) {
+        return dictMapper.findListByParentIds(areaId);
     }
 }
 

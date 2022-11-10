@@ -23,6 +23,8 @@ dubbo:
   registry:
     id: zk-registry
     address: zookeeper://localhost:2181
+  consumer:
+    check: false
 
 mybatis-plus:
   #  global-config:

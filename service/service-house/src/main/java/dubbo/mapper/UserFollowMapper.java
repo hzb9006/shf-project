@@ -1,7 +1,12 @@
 package dubbo.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.pagehelper.Page;
 import model.UserFollow;
+import org.apache.ibatis.annotations.Param;
+import vo.UserFollowVo;
+
+import java.util.List;
 
 /**
 * @author 大饼干
@@ -11,6 +16,9 @@ import model.UserFollow;
 */
 public interface UserFollowMapper extends BaseMapper<UserFollow> {
 
+    Integer getcountByuserIdAndHouseId(@Param("userId") Long id, @Param("houseId") long id1);
+
+    Page<UserFollowVo> findPageList(@Param("userId") Long userId);
 }
 
 

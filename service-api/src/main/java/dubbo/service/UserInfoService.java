@@ -11,4 +11,5 @@ import model.UserInfo;
 */
 public interface UserInfoService extends IService<UserInfo> {
 
+    UserInfo getUserInfoByPhone(String phone);
 }

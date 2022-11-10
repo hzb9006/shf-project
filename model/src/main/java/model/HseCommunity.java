@@ -118,6 +118,7 @@ public class HseCommunity implements Serializable {
      */
     private Integer isDeleted;
 
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 

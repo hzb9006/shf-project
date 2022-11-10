@@ -2,13 +2,11 @@ package shfweb.controller;
 
 import dubbo.service.HseDictService;
 import lombok.extern.slf4j.Slf4j;
+import model.HseDict;
 import org.apache.dubbo.config.annotation.DubboReference;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import result.Result;
 
 import java.util.List;
@@ -38,6 +36,14 @@ public class DictController {
         System.out.println("查询到的结果是"+serviceZnodes);
         return Result.ok(serviceZnodes);
 
+    }
+    // 根据父id获取所有子节点，回显到小区管理
+    @ResponseBody
+    @RequestMapping("/findListByParentId/{areaId}")
+    public Result findListByParentId(@PathVariable("areaId") Long areaId){
+        // 调用dictService中根据父id查询所有子节点的方法
+        List<HseDict> listByParentId = dictService.findListByParentIds(areaId);
+        return Result.ok(listByParentId);
     }
 
 

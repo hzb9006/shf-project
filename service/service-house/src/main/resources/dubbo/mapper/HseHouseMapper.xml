@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dubbo.mapper.HseHouseMapper">
+
+    <resultMap id="BaseResultMap" type="model.HseHouse">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="communityId" column="community_id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="description" column="description" jdbcType="VARCHAR"/>
+            <result property="totalPrice" column="total_price" jdbcType="DECIMAL"/>
+            <result property="unitPrice" column="unit_price" jdbcType="DECIMAL"/>
+            <result property="buildArea" column="build_area" jdbcType="DECIMAL"/>
+            <result property="insideArea" column="inside_area" jdbcType="DECIMAL"/>
+            <result property="houseTypeId" column="house_type_id" jdbcType="VARCHAR"/>
+            <result property="floorId" column="floor_id" jdbcType="BIGINT"/>
+            <result property="buildStructureId" column="build_structure_id" jdbcType="BIGINT"/>
+            <result property="directionId" column="direction_id" jdbcType="BIGINT"/>
+            <result property="decorationId" column="decoration_id" jdbcType="BIGINT"/>
+            <result property="houseUseId" column="house_use_id" jdbcType="BIGINT"/>
+            <result property="elevatorRatio" column="elevator_ratio" jdbcType="VARCHAR"/>
+            <result property="listingDate" column="listing_date" jdbcType="DATE"/>
+            <result property="lastTradeDate" column="last_trade_date" jdbcType="DATE"/>
+            <result property="defaultImageUrl" column="default_image_url" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,community_id,name,
+        description,total_price,unit_price,
+        build_area,inside_area,house_type_id,
+        floor_id,build_structure_id,direction_id,
+        decoration_id,house_use_id,elevator_ratio,
+        listing_date,last_trade_date,default_image_url,
+        status,create_time,update_time,
+        is_deleted
+    </sql>
+    <select id="findAll" resultType="model.HseHouse">
+        select * from hse_house
+        <where>
+            <if test="communityId != null and communityId != ''">
+                and community_id = #{communityId}
+            </if>
+            <if test="name != null and name != ''">
+                and name like CONCAT('%',#{name},'%')
+            </if>
+            <if test="houseTypeId != null and houseTypeId != ''">
+                and house_type_id = #{houseTypeId}
+            </if>
+            <if test="floorId != null and floorId != ''">
+                and floor_id = #{floorId}
+            </if>
+            <if test="buildStructureId != null and buildStructureId != ''">
+                and build_structure_id = #{buildStructureId}
+            </if>
+            <if test="directionId != null and directionId != ''">
+                and direction_id = #{directionId}
+            </if>
+            <if test="decorationId != null and decorationId != ''">
+                and decoration_id = #{decorationId}
+            </if>
+            <if test="houseUseId != null and houseUseId != ''">
+                and house_use_id = #{houseUseId}
+            </if>
+            and is_deleted = 0
+        </where>
+    </select>
+    <select id="findPageList" resultType="vo.HouseVo">
+        select
+        cmty.name as communityName,
+        hse.id,
+        hse.name,
+        hse.build_area as buildArea,
+        hse.unit_price as unitPrice,
+        hse.total_price as totalPrice,
+        hse.house_type_id as houseTypeId,
+        hse.floor_id as floorId,
+        hse.direction_id as directionId,
+        hse.default_image_url as defaultImageUrl,
+        hse.create_time as createTime
+        from hse_house hse
+        left join hse_community cmty on cmty.id = hse.community_id
+        <where>
+            <if test="houseQueryVo.keyword != null and houseQueryVo.keyword != ''">
+                and hse.name like CONCAT('%',#{houseQueryVo.keyword},'%')
+            </if>
+            <if test="houseQueryVo.areaId != null">
+                and cmty.area_id = #{houseQueryVo.areaId}
+            </if>
+            <if test="houseQueryVo.plateId != null">
+                and cmty.plate_id = #{houseQueryVo.plateId}
+            </if>
+            <if test="houseQueryVo.houseTypeId != null">
+                and hse.house_type_id = #{houseQueryVo.houseTypeId}
+            </if>
+            <if test="houseQueryVo.floorId != null">
+                and hse.floor_id = #{houseQueryVo.floorId}
+            </if>
+            <if test="houseQueryVo.buildStructureId != null">
+                and hse.build_structure_id = #{houseQueryVo.buildStructureId}
+            </if>
+            <if test="houseQueryVo.directionId != null">
+                and hse.direction_id = #{houseQueryVo.directionId}
+            </if>
+            <if test="houseQueryVo.decorationId != null">
+                and hse.decoration_id = #{houseQueryVo.decorationId}
+            </if>
+            <if test="houseQueryVo.houseUseId != null">
+                and hse.house_use_id = #{houseQueryVo.houseUseId}
+            </if>
+            and hse.status = 1
+            and hse.is_deleted = 0
+            and cmty.is_deleted = 0
+        </where>
+        <if test="houseQueryVo.defaultSort == 1">
+            order by hse.id desc
+        </if>
+        <if test="houseQueryVo.priceSort == 1">
+            order by hse.total_price desc
+        </if>
+        <if test="houseQueryVo.timeSort == 1">
+            order by hse.create_time desc
+        </if>
+    </select>
+</mapper>

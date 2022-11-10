@@ -1,5 +1,10 @@
 package result;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 /**
  * 全局统一返回结果类
  *
@@ -32,6 +37,8 @@ public class Result<T> {
         return result;
     }
 
+
+    @RequestMapping
     public static <T> Result<T> build(T body, ResultCodeEnum resultCodeEnum) {
         Result<T> result = build(body);
         result.setCode(resultCodeEnum.getCode());

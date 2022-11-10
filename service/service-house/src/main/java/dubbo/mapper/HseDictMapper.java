@@ -21,6 +21,16 @@ public interface HseDictMapper extends BaseMapper<HseDict> {
 
     // 判断该节点是否为父节点
     Integer countIsParent(Long id);
+
+    // 根据编码获取dict对象
+    HseDict getDictByDictCode(String dictCoDde);
+
+    // 根据id获取name
+    String getNameByid(Long id);
+
+    String getNameByParentId(Long id);
+
+    List<HseDict> findListByParentIds(Long areaId);
 }
 
 

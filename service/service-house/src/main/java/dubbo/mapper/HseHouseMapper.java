@@ -2,7 +2,13 @@ package dubbo.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.github.pagehelper.Page;
 import model.HseHouse;
+import org.apache.ibatis.annotations.Param;
+import vo.HouseQueryVo;
+import vo.HouseVo;
+
+import java.util.List;
 
 /**
 * @author 大饼干
@@ -12,6 +18,10 @@ import model.HseHouse;
 */
 public interface HseHouseMapper extends BaseMapper<HseHouse> {
 
+    List<HseHouse> findAll(HseHouse hseHouse);
+
+
+    Page<HouseVo> findPageList(@Param(value = "houseQueryVo") HouseQueryVo houseQueryVo); // 此处必须加上注解，否则有bug
 }
 
 

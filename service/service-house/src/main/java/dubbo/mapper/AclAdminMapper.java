@@ -3,6 +3,7 @@ package dubbo.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import model.AclAdmin;
 
+import java.util.List;
 
 /**
 * @author 大饼干
@@ -12,6 +13,8 @@ import model.AclAdmin;
 */
 public interface AclAdminMapper extends BaseMapper<AclAdmin> {
 
+
+    List<AclAdmin> findAll();
 }
 
 

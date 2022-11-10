@@ -61,7 +61,7 @@ public class HseHouse implements Serializable {
     /**
      * 户型：（字典id）
      */
-    private String houseTypeId;
+    private Long houseTypeId;
 
     /**
      * 楼层（字典id）

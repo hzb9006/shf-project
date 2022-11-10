@@ -5,11 +5,10 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication()
 @EnableDubbo
 @MapperScan(basePackages = "dubbo.mapper")// 不要忘记！！
 public class ServiceHouseApplication {
-
     public static void main(String[] args) {
         SpringApplication springApplication = new SpringApplication(ServiceHouseApplication.class);
         springApplication.setAllowCircularReferences(Boolean.TRUE);

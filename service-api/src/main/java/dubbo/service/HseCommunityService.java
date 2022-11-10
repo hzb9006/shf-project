@@ -2,7 +2,12 @@ package dubbo.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.github.pagehelper.PageInfo;
 import model.HseCommunity;
+import model.HseCommunityDto;
+
+import java.util.List;
+import java.util.Map;
 
 /**
 * @author 大饼干
@@ -11,4 +16,7 @@ import model.HseCommunity;
 */
 public interface HseCommunityService extends IService<HseCommunity> {
 
+    PageInfo<HseCommunityDto> getAllBypage(Map<String, Object> filters);
+
+    List<HseCommunity> findAll();
 }
